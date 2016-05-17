@@ -10,10 +10,10 @@ sass:
 
 # Resume settings
 resume_avatar:                  "true"
-resume_name:                    "Homer J. Simpson"
-resume_title:                   "Nuclear Safety Inspector"
+resume_name:                    "Dominic Richter"
+resume_title:                   "Webentwickler Backend (PHP)"
 resume_contact_email:
-  "homerjsimpson@youremailaddress.com"
+  "kontakt@twitnic.de"
 
 # use "yes" to display the email contact button,
 # "no" to display an "I'm not looking for work" message,
