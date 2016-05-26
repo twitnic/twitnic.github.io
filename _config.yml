@@ -34,12 +34,12 @@ resume_section_associations:    true
 # Resume social links
 # uncomment the options you wish to display, and add your own URL
 resume_social_links:
-  resume_github_url:            "https://github.com/jglovier/resume-template"
+  resume_github_url:            "https://github.com/twitnic"
   resume_twitter_url:           "http://twitter.com/Twitt_Nic"
-  resume_dribbble_url:          "https://dribbble.com/jag"
-  # resume_facebook_url:          "insert Facebook URL here"
-  resume_linkedin_url:          "https://www.linkedin.com/in/joelglovier"
-  # resume_instagram_url:         "insert your Instagram URL here"
+#  resume_dribbble_url:          "https://dribbble.com/jag"
+   resume_facebook_url:          "https://www.facebook.com/DominicRichter"
+  resume_linkedin_url:          "https://www.xing.com/profile/Dominic_Richter3"
+   resume_instagram_url:         "https://www.instagram.com/twitnic/"
   resume_website_url:           "http://twitnic.de"
 
 # Design settings
