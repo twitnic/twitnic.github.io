@@ -1,6 +1,6 @@
 # Site settings
-title: "Dominic Richter - Resume / Lebenslauf"
-description: "A resume template for Jekyll and GitHub Pages sites."
+title: "Dominic Richter - Webentwickler aus Leipzig"
+description: "Resume / Lebenslauf"
 
 # Build settings
 markdown: kramdown
@@ -12,8 +12,7 @@ sass:
 resume_avatar:                  "true"
 resume_name:                    "Dominic Richter"
 resume_title:                   "Webentwickler Backend (PHP)"
-resume_contact_email:
-  "kontakt@twitnic.de"
+resume_contact_email:           "kontakt@twitnic.de"
 
 # use "yes" to display the email contact button,
 # "no" to display an "I'm not looking for work" message,
