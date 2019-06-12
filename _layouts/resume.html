@@ -37,7 +37,7 @@
         <p class="executive-summary">Falls Sie einen belastbaren und teamfähigen PHP-Entwickler suchen, dann schreiben Sie mir.</p>
         <a href="mailto:{{ site.resume_contact_email }}" class="contact-button" itemprop="email">Kontaktiere mich!</a>
         {% elsif site.resume_looking_for_work == 'no' %}
-        <a class="contact-button not-looking">Aktuell suche ich nicht nach neuen Angeboten.</a>
+        <div class="contact-button not-looking">Aktuell suche ich nicht nach neuen Angeboten.</div>
         {% else %}
         {% endif %}
 
@@ -53,8 +53,29 @@
 
         <!-- Duplicate these resume-item elements and edit accordingly for each job you want to add here -->
         <div class="resume-item" itemscope itemprop="worksFor" itemtype="http://schema.org/Organization">
+          <h3 class="resume-item-title" itemprop="name">Powercloud GmbH</h3>
+          <h4 class="resume-item-details" itemprop="description">Webentwickler PHP (Backend) &bull; Juli, 2018 &mdash; Heute</h4>
+          <!--<p class="resume-item-copy">Write about your core competencies in one or two sentences describing your position. If you held the position for a long time, it could be a longer section, including a couple bullet points:</p>-->
+          <ul class="resume-item-list">
+            <li>TBD</li>
+          </ul>
+          <!--<p class="resume-item-copy">If you're going to copy paste markup, or edit it, just be sure to keep the appropriate classnames on your new elements for styling purposes.</p>-->
+          <ul class="tags">
+            <li><a href="#">Jira</a></li>
+            <li><a href="#">Bitbucket</a></li>
+            <li><a href="#">Git</a></li>
+            <li><a href="#">Bamboo</a></li>
+            <li><a href="#">Slim Framework</a></li>
+            <li><a href="#">Docker</a></li>
+            <li><a href="#">Symfony</a></li>
+            <li><a href="#">Linux Server</a></li>
+          </ul>
+        </div><!-- end of resume-item -->
+
+        <!-- Duplicate these resume-item elements and edit accordingly for each job you want to add here -->
+        <div class="resume-item" itemscope itemprop="worksFor" itemtype="http://schema.org/Organization">
           <h3 class="resume-item-title" itemprop="name">Datenwerk GmbH</h3>
-          <h4 class="resume-item-details" itemprop="description">Webentwickler PHP (Backend) &bull; August, 2016 &mdash; Heute</h4>
+          <h4 class="resume-item-details" itemprop="description">Webentwickler PHP (Backend) &bull; August, 2016 &mdash; Juni 2018</h4>
           <!--<p class="resume-item-copy">Write about your core competencies in one or two sentences describing your position. If you held the position for a long time, it could be a longer section, including a couple bullet points:</p>-->
           <ul class="resume-item-list">
             <li>Backendentwicklung (Wartung, Entwicklung neuer Features, Schnittstellen & kompletter Seiten, Bugfixing)</li>
