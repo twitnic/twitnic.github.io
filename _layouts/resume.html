@@ -28,16 +28,23 @@
 
         <div class="executive-summary" itemprop="description">
           <p>Hallo, ich bin Dominic und wohne in Leipzig.<br>
-            Seit 2014 bin ich hauptberuflich PHP-Entwickler (Backend). Nebenbei interessiere ich mich noch für die Server- und Netzwerkadministration und so ziemlich allem was mit iOS und Android zutun hat.
+            Seit 2014 bin ich hauptberuflich PHP-Entwickler (Backend). Nebenbei interessiere ich mich noch für:<br>
+            <ul>
+              <li>Server- und Netzwerkadministration</li>
+              <li>Android & iOS Entwicklung</li>
+              <li>alles rund um Retrofit von Funktionalitäten und Softwarehacks von Autos der VW AG</li>
+              <li>Pokemon</li>
+              <li>Raspberry Pi & Arduino & ESP</li>
+              <li>Balkonkraftwerke und deren Optimierung & Auswerung (bspw. mit MQTT und Grafana / NodeRed)</li>
+            </ul>
           </p>
-          <p>Der Nutzer soll das bestmögliche Webseitenerlebnis haben. Ich will neue Funktionen erstellen, Fehlerbehebung und vorhandene Funktionen ausbauen.</p>
         </div>
 
         {% if site.resume_looking_for_work == 'yes' %}
         <p class="executive-summary">Falls Sie einen belastbaren und teamfähigen PHP-Entwickler suchen, dann schreiben Sie mir.</p>
         <a href="mailto:{{ site.resume_contact_email }}" class="contact-button" itemprop="email">Kontaktiere mich!</a>
         {% elsif site.resume_looking_for_work == 'no' %}
-        <div class="contact-button not-looking">Aktuell suche ich nicht nach neuen Angeboten.</div>
+        <!--<div class="contact-button not-looking">Aktuell suche ich nicht nach neuen Angeboten.</div>-->
         {% else %}
         {% endif %}
 
@@ -64,6 +71,10 @@
             <li>Anpassung von CI/CD</li>
             <li>Planung und Umsetzung von (größeren) Refactorings</li>
             <li>Docker</li>
+            <li>Management von Composer-Paketen</li>
+            <li>Beheben von Sicherheitslücken</li>
+            <li>Planung von Stabilisierungs-Arbeiten</li>
+            <li>Erstellung und Planung von Epics, Storys und Bugs (Tickets)</li>
           </ul>
           <!--<p class="resume-item-copy">If you're going to copy paste markup, or edit it, just be sure to keep the appropriate classnames on your new elements for styling purposes.</p>-->
           <ul class="tags">
