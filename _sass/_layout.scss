@@ -1,74 +1,35 @@
-// Layout styles
-// ---------------------------------------/
+.wrapper { width: calc(100% - 112px); max-width: 1160px; margin: 0 auto; }
+.site-header { position: sticky; top: 0; z-index: 10; background: rgba($paper, .96); backdrop-filter: blur(14px); }
+.navigation { min-height: 88px; display: flex; align-items: center; justify-content: space-between; gap: 30px; border-bottom: 1px solid $line; }
+.brand { display: inline-flex; align-items: baseline; font-size: 36px; line-height: 1; letter-spacing: -.09em; font-weight: 800; text-decoration: none; }
+.brand span { color: $accent-ink; }
+.navigation-links { display: flex; align-items: center; gap: 32px; margin-left: auto; }
+.navigation-links > a { padding: 12px 0; text-decoration: none; font-size: 12px; font-weight: 650; position: relative; }
+.navigation-links > a::after { content: ""; position: absolute; bottom: 5px; left: 0; right: 0; height: 2px; background: $accent-ink; transform: scaleX(0); transform-origin: left; transition: transform .2s; }
+.navigation-links > a:hover::after, .navigation-links > a[aria-current="location"]::after { transform: scaleX(1); }
+.navigation .button { min-height: 42px; padding: 10px 17px; margin-left: 8px; font-size: 12px; gap: 18px; }
+.content-section { padding: 82px 0; border-top: 1px solid $line; display: grid; grid-template-columns: 260px minmax(0, 1fr); gap: 60px; }
+.section-header .eyebrow { color: $muted; margin-bottom: 22px; }
+.section-header h2 { font-size: 38px; }
+.section-header > p:not(.eyebrow) { margin-top: 20px; font-size: 14px; color: $muted; max-width: 235px; }
+.section-content { min-width: 0; }
+.section-header .print-button { margin-top: 28px; }
+.page-footer { padding: 28px 0; display: flex; justify-content: space-between; align-items: center; gap: 24px; font: 11px/1.6 $mono-font; color: $muted; }
+.page-footer a { display: inline-flex; align-items: center; gap: 12px; text-decoration: none; min-height: 44px; }
+.page-footer a:hover { color: $ink; }
 
-// Layout from Primer (https://github.com/primer/primer/blob/master/scss/_layout.scss)
-
-// Fixed-width, centered column for site content.
-.container {
-  width: $container-width;
-  margin-right: auto;
-  margin-left: auto;
-  @include clearfix;
+@media (max-width: 1000px) {
+  .wrapper { width: calc(100% - 64px); }
+  .content-section { grid-template-columns: 210px minmax(0, 1fr); gap: 35px; }
 }
-
-// Grid system
-//
-// Create rows with `.columns` to clear the floated columns and outdent the
-// padding on `.column`s with negative margin for alignment.
-
-.columns {
-  margin-right: -$grid-gutter;
-  margin-left: -$grid-gutter;
-  @include clearfix;
-}
-
-// Base class for every column (requires a column width from below)
-.column {
-  float: left;
-  padding-right: $grid-gutter;
-  padding-left: $grid-gutter;
-}
-
-// Column widths
-.one-third {
-  width: 33.333333%;
-}
-
-.two-thirds {
-  width: 66.666667%;
-}
-
-.one-fourth {
-  width: 25%;
-}
-
-.one-half {
-  width: 50%;
-}
-
-.three-fourths {
-  width: 75%;
-}
-
-.one-fifth {
-  width: 20%;
-}
-
-.four-fifths {
-  width: 80%;
-}
-
-// Single column hack
-.single-column {
-  padding-right: $grid-gutter;
-  padding-left: $grid-gutter;
-}
-
-// Equal width columns via table sorcery.
-.table-column {
-  display: table-cell;
-  width: 1%;
-  padding-right: $grid-gutter;
-  padding-left: $grid-gutter;
-  vertical-align: top;
+@media (max-width: 760px) {
+  .wrapper { width: calc(100% - 40px); }
+  .navigation { min-height: 72px; gap: 16px; }
+  .navigation-links { gap: 20px; }
+  .navigation .button { display: none; }
+  .content-section { padding: 56px 0; grid-template-columns: minmax(0, 1fr); gap: 30px; }
+  .section-header h2 { font-size: 36px; }
+  .section-header .eyebrow { margin-bottom: 14px; }
+  .section-header > p:not(.eyebrow) { max-width: 380px; margin-top: 14px; }
+  .page-footer { align-items: flex-start; font-size: 10px; }
 }

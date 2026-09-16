@@ -1,79 +1,70 @@
 <!DOCTYPE html>
-<html>
-
+<html lang="de">
 {% include head.html %}
+<body class="theme-{{ site.resume_theme | default: 'default' }}" id="top">
+  <a class="skip-link" href="#inhalt">Zum Inhalt springen</a>
+  <header class="site-header no-print">
+    <nav class="navigation wrapper" aria-label="Hauptnavigation">
+      <a class="brand" href="#top" aria-label="Dominic Richter – Startseite">dr<span>.</span></a>
+      <div class="navigation-links">
+        {% if site.resume_section_experience %}<a href="#erfahrung">Erfahrung</a>{% endif %}
+        {% if site.resume_section_skills %}<a href="#stack">Tech-Stack</a>{% endif %}
+        <a href="#ueber-mich">Über mich</a>
+      </div>
+      {% if site.resume_contact_email %}<a class="button" href="#kontakt">Kontakt <span class="arrow" aria-hidden="true">↗</span></a>{% endif %}
+    </nav>
+  </header>
 
-<body class="theme-{% if site.resume_theme %}{{ site.resume_theme }}{% endif %}">
-
-<div class="wrapper" itemscope itemtype="http://schema.org/Person">
-  <meta itemprop="telephone" content="{{ site.resume_contact_telephone }}"/>
-  <meta itemprop="address" content="{{ site.resume_contact_address }}"/>
-
-  <header class="page-header">
-
-    <!-- You can turn off the avatar in _config.yml by setting to false -->
-    {% if site.resume_avatar == 'true' %}
-    <img src="images/avatar.jpg" alt="my photo" class="avatar no-print" itemprop="image">
-    {% endif %}
-
-    <!-- Your name is defined in the _config.yml file -->
-    <h1 class="header-name" itemprop="name">{{ site.resume_name }}</h1>
-
-    <!-- To display contact info here, change `display_header_contact_info` value in _config.yml to true -->
-    {% if site.display_header_contact_info == 'true' %}
-    <div class="header-contact-info">
-      <p>{{ site.resume_header_contact_info }}</p>
-    </div>
-    {% endif %}
-
-    <div class="title-bar no-print">
-
-      <!-- Your title is also defined in the _config.yml file -->
-      <h2 class="header-title" itemprop="jobTitle">{{ site.resume_title }}</h2>
-
-      <!-- This is the markup for the icon links; moved out to an include because it's very verbose, and you shouldn't ever need to edit the markup (unless you want to re-order the icons); if you want to customize which links appear, define them in the _config.yml file -->
-      {% include icon-links.html %}
-    </div>
-
-        <div class="executive-summary" itemprop="description">
-          <p>Hallo, ich bin Dominic und wohne in Leipzig.<br>
-            Seit 2014 bin ich hauptberuflich PHP-Entwickler (Backend). Am liebsten <b>refactor ich alte Anwendungen</b> und bringe sie auf den neusten Stand.<br>Nebenbei interessiere ich mich noch für:</p>
-            <ul>
-              <li>Server- und Netzwerkadministration</li>
-              <li>Android & iOS Entwicklung</li>
-              <li>alles rund um Retrofit von Funktionalitäten und Softwarehacks von Autos der VW AG</li>
-              <li>Micro-Controller</li>
-              <li>Solaranlagen und deren Optimierung & Auswertung (bspw. mit MQTT und Grafana / NodeRed / Influx / KI)</li>
-              <li>Pokemon</li>
-            </ul>
+  <main class="wrapper" id="inhalt" itemscope itemtype="https://schema.org/Person">
+    {% if site.resume_contact_telephone %}<meta itemprop="telephone" content="{{ site.resume_contact_telephone | escape }}">{% endif %}
+    {% if site.resume_contact_address %}<meta itemprop="address" content="{{ site.resume_contact_address | escape }}">{% endif %}
+    <header class="hero{% unless site.resume_avatar == 'true' %} hero-without-portrait{% endunless %}">
+      <div class="hero-copy">
+        <p class="eyebrow hero-eyebrow"><span class="status-dot" aria-hidden="true"></span> <span itemprop="jobTitle">{{ site.resume_title }}</span></p>
+        <h1 itemprop="name">{{ site.resume_name | escape | replace: ' ', '<br>' }}<span class="name-dot">.</span></h1>
+        <p class="hero-statement">Ich bringe Software weiter.</p>
+        <p class="hero-description" itemprop="description">Hallo, ich bin Dominic aus Leipzig. Ich entwickle Backends, refactore gewachsene Anwendungen und bringe sie auf den neuesten Stand.</p>
+        {% if site.display_header_contact_info == 'true' %}<p class="header-contact-info">{{ site.resume_header_contact_info }}</p>{% endif %}
+        <div class="hero-actions no-print">
+          {% if site.resume_section_experience %}<a class="button" href="#erfahrung">Mein Werdegang <span class="arrow" aria-hidden="true">↓</span></a>{% endif %}
+          {% if site.resume_social_links.resume_github_url %}<a class="text-link" href="{{ site.resume_social_links.resume_github_url }}">GitHub <span class="arrow" aria-hidden="true">↗</span></a>{% endif %}
         </div>
+        {% if site.resume_looking_for_work == 'yes' %}<p class="availability">Offen für neue berufliche Möglichkeiten. <a href="mailto:{{ site.resume_contact_email }}">Lass uns sprechen.</a></p>{% endif %}
+      </div>
+      {% if site.resume_avatar == 'true' %}
+      <figure class="portrait no-print">
+        <div class="portrait-frame">
+          <div class="portrait-grid" aria-hidden="true"></div>
+          <img class="avatar" src="{{ '/images/avatar.jpg' | relative_url }}" width="400" height="400" alt="Porträt von {{ site.resume_name }}" itemprop="image" fetchpriority="high">
+          <svg class="portrait-spark" viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="9" aria-hidden="true"><path d="M50 2v96M2 50h96M16 16l68 68M16 84l68-68"/></svg>
+          <div class="portrait-note">Komplexität runter.<br>Qualität rauf.<span aria-hidden="true">↗</span></div>
+        </div>
+        <figcaption><span class="location-dot" aria-hidden="true"></span> Leipzig, Deutschland <span class="portrait-caption-code" aria-hidden="true">&lt;/&gt;</span></figcaption>
+      </figure>
+      {% endif %}
+    </header>
 
-        {% if site.resume_looking_for_work == 'yes' %}
-        <p class="executive-summary">Falls Sie einen belastbaren und teamfähigen PHP-Entwickler suchen, dann schreiben Sie mir.</p>
-        <a href="mailto:{{ site.resume_contact_email }}" class="contact-button" itemprop="email">Kontaktiere mich!</a>
-        {% elsif site.resume_looking_for_work == 'no' %}
-        <!--<div class="contact-button not-looking">Aktuell suche ich nicht nach neuen Angeboten.</div>-->
-        {% else %}
-        {% endif %}
+    <div class="focus-strip" aria-label="Meine Schwerpunkte">
+      <div><span class="eyebrow">Seit 2014</span><strong>Im Code zu Hause.</strong></div>
+      <div><span class="eyebrow">Mein Schwerpunkt</span><strong>Backend & Refactoring</strong></div>
+      <div><span class="eyebrow">Mein Blick geht weiter</span><strong>Code bis Infrastruktur</strong></div>
+    </div>
+{% if site.resume_section_experience %}
+<section class="content-section experience-section" id="erfahrung" aria-labelledby="erfahrung-title">
 
-      </header>
+        <header class="section-header"><p class="eyebrow">01 / Erfahrung</p><h2 id="erfahrung-title">Mit jeder Zeile<br>weiter.</h2><p>Von Webanwendungen bis zur Plattform. Mein beruflicher Weg.</p><button class="button button-quiet print-button no-print" type="button" data-print hidden>Lebenslauf drucken <span aria-hidden="true">↗</span></button></header><div class="section-content">
 
-      {% if site.resume_section_experience %}
-      <!-- begin Experience -->
-      <section class="content-section">
-
-        <header class="section-header">
-          <h2>Beruflicher Werdegang</h2>
-        </header>
-
-        <!-- Duplicate these resume-item elements and edit accordingly for each job you want to add here -->
-        <div class="resume-item" itemscope itemprop="worksFor" itemtype="https://schema.org/Organization">
-          <h3 class="resume-item-title" itemprop="name">Chargecloud GmbH</h3>
-          <h4 class="resume-item-details" itemprop="description">Senior Software Engineer &bull; November 2023 &mdash; Heute</h4>
-          <h5 class="resume-item-details" itemprop="description">Lead Team "Technical Maintainance" &bull; März 2024 &mdash; Juli 2025</h5>
-          <h5 class="resume-item-details" itemprop="description">Team Platform Engineering &bull; Juli 2025 &mdash; Februar 2026</h5>
-          <h5 class="resume-item-details" itemprop="description">Team Accounting &bull; Februar 2026 &mdash; Heute</h5>
-          <!--<p class="resume-item-copy">Write about your core competencies in one or two sentences describing your position. If you held the position for a long time, it could be a longer section, including a couple bullet points:</p>-->
+        <article class="resume-item experience-item" itemscope itemprop="worksFor" itemtype="https://schema.org/Organization">
+      <span class="experience-index" aria-hidden="true">01</span>
+      <div class="experience-body">
+        <div class="experience-heading"><h3 class="resume-item-title" itemprop="name">Chargecloud GmbH</h3><span class="current-badge"><span class="status-dot" aria-hidden="true"></span> Aktuell</span></div>
+        <p class="role">Senior Software Engineer<span class="role-period">November 2023 &mdash; Heute</span></p>
+        <details class="experience-details" open>
+          <summary>Aufgaben & Tech-Stack <span class="details-icon" aria-hidden="true"></span></summary>
+          <div class="details-body"><p class="role-history">Lead Team "Technical Maintainance" &bull; März 2024 &mdash; Juli 2025</p>
+          <p class="role-history">Team Platform Engineering &bull; Juli 2025 &mdash; Februar 2026</p>
+          <p class="role-history">Team Accounting &bull; Februar 2026 &mdash; Heute</p>
+          
           <ul class="resume-item-list">
             <li>Optimierung und Fehlerbehebung der Anwendungen CRMI</li>
             <li>Ansprechpartner innerhalb und außerhalb des Teams für technische Fragen</li>
@@ -90,32 +81,35 @@
             <li>Refactoring der Anwendung um das PHP Upgrade von 7.2 auf 8.x zu schaffen</li>
             <li>Erstellung und Einführung von AMI Images</li>
           </ul>
-          <!--<p class="resume-item-copy">If you're going to copy paste markup, or edit it, just be sure to keep the appropriate classnames on your new elements for styling purposes.</p>-->
+          
           <ul class="tags">
-            <li><a href="#">Jira</a></li>
-            <li><a href="#">Gitlab</a></li>
-            <li><a href="#">Git</a></li>
-            <li><a href="#">Team City</a></li>
-            <li><a href="#">Slim Framework</a></li>
-            <li><a href="#">Docker</a></li>
-            <li><a href="#">Symfony</a></li>
-            <li><a href="#">Linux Server</a></li>
-            <li><a href="#">Composer</a></li>
-            <li><a href="#">Refactorings</a></li>
-            <li><a href="#">Systemupgrades</a></li>
-            <li><a href="#">Caddy</a></li>
-            <li><a href="#">Claude</a></li>
-            <li><a href="#">MCP</a></li>
-          </ul>
-        </div><!-- end of resume-item -->
+            <li><span>Jira</span></li>
+            <li><span>Gitlab</span></li>
+            <li><span>Git</span></li>
+            <li><span>Team City</span></li>
+            <li><span>Slim Framework</span></li>
+            <li><span>Docker</span></li>
+            <li><span>Symfony</span></li>
+            <li><span>Linux Server</span></li>
+            <li><span>Composer</span></li>
+            <li><span>Refactorings</span></li>
+            <li><span>Systemupgrades</span></li>
+            <li><span>Caddy</span></li>
+            <li><span>Claude</span></li>
+            <li><span>MCP</span></li>
+          </ul></div>
+        </details>
+      </div>
+    </article>
 
-        <!-- Duplicate these resume-item elements and edit accordingly for each job you want to add here -->
-        <div class="resume-item" itemscope itemprop="worksFor" itemtype="https://schema.org/Organization">
-          <h3 class="resume-item-title" itemprop="name">Powercloud GmbH</h3>
-          <h4 class="resume-item-details" itemprop="description">Webentwickler PHP (Backend) &bull; Juli 2018 &mdash; 2021</h4>
-          <h4 class="resume-item-details" itemprop="description">Tech Lead (Team Core) &bull; 2022 &mdash; Oktober 2023</h4>
-          <!--<p class="resume-item-copy">Write about your core competencies in one or two sentences describing your position. If you held the position for a long time, it could be a longer section, including a couple bullet points:</p>-->
-          <ul class="resume-item-list">
+        <article class="resume-item experience-item" itemscope itemprop="worksFor" itemtype="https://schema.org/Organization">
+      <span class="experience-index" aria-hidden="true">02</span>
+      <div class="experience-body">
+        <div class="experience-heading"><h3 class="resume-item-title" itemprop="name">Powercloud GmbH</h3></div>
+        <p class="role">Webentwickler PHP (Backend)<span class="role-period">Juli 2018 &mdash; 2021</span></p><p class="role">Tech Lead (Team Core)<span class="role-period">2022 &mdash; Oktober 2023</span></p>
+        <details class="experience-details">
+          <summary>Aufgaben & Tech-Stack <span class="details-icon" aria-hidden="true"></span></summary>
+          <div class="details-body"><ul class="resume-item-list">
             <li>Entwicklungen im Bereich Edifact, MSB und <u>Core</u>.</li>
             <li>Optimierung und Fehlerbehebung der Anwendungen Powercloud und EDM</li>
             <li>Ansprechpartner innerhalb und außerhalb des Teams für technische Fragen</li>
@@ -131,60 +125,68 @@
             <li>Update modifizierter Library's, um diese wieder von Origin beziehen zu können</li>
             <li>Refactoring der Anwendung um das PHP Upgrade von 7.2 auf 7.4 auf 8.x zu schaffen</li>
           </ul>
-          <!--<p class="resume-item-copy">If you're going to copy paste markup, or edit it, just be sure to keep the appropriate classnames on your new elements for styling purposes.</p>-->
+          
           <ul class="tags">
-            <li><a href="#">Jira</a></li>
-            <li><a href="#">Bitbucket</a></li>
-            <li><a href="#">Git</a></li>
-            <li><a href="#">Bamboo</a></li>
-            <li><a href="#">Slim Framework</a></li>
-            <li><a href="#">Docker</a></li>
-            <li><a href="#">Symfony</a></li>
-            <li><a href="#">Linux Server</a></li>
-            <li><a href="#">Composer</a></li>
-            <li><a href="#">Refactorings</a></li>
-            <li><a href="#">Systemupgrades</a></li>
-            <li><a href="#">Edifact</a></li>
-            <li><a href="#">Eventsystem</a></li>
-            <li><a href="#">Jenkins</a></li>
-          </ul>
-        </div><!-- end of resume-item -->
+            <li><span>Jira</span></li>
+            <li><span>Bitbucket</span></li>
+            <li><span>Git</span></li>
+            <li><span>Bamboo</span></li>
+            <li><span>Slim Framework</span></li>
+            <li><span>Docker</span></li>
+            <li><span>Symfony</span></li>
+            <li><span>Linux Server</span></li>
+            <li><span>Composer</span></li>
+            <li><span>Refactorings</span></li>
+            <li><span>Systemupgrades</span></li>
+            <li><span>Edifact</span></li>
+            <li><span>Eventsystem</span></li>
+            <li><span>Jenkins</span></li>
+          </ul></div>
+        </details>
+      </div>
+    </article>
 
-        <!-- Duplicate these resume-item elements and edit accordingly for each job you want to add here -->
-        <div class="resume-item" itemscope itemprop="worksFor" itemtype="https://schema.org/Organization">
-          <h3 class="resume-item-title" itemprop="name">Datenwerk GmbH</h3>
-          <h4 class="resume-item-details" itemprop="description">Webentwickler PHP (Backend) &bull; August, 2016 &mdash; Juni 2018</h4>
-          <!--<p class="resume-item-copy">Write about your core competencies in one or two sentences describing your position. If you held the position for a long time, it could be a longer section, including a couple bullet points:</p>-->
-          <ul class="resume-item-list">
+        <article class="resume-item experience-item" itemscope itemprop="worksFor" itemtype="https://schema.org/Organization">
+      <span class="experience-index" aria-hidden="true">03</span>
+      <div class="experience-body">
+        <div class="experience-heading"><h3 class="resume-item-title" itemprop="name">Datenwerk GmbH</h3></div>
+        <p class="role">Webentwickler PHP (Backend)<span class="role-period">August, 2016 &mdash; Juni 2018</span></p>
+        <details class="experience-details">
+          <summary>Aufgaben & Tech-Stack <span class="details-icon" aria-hidden="true"></span></summary>
+          <div class="details-body"><ul class="resume-item-list">
             <li>Backendentwicklung (Wartung, Entwicklung neuer Features, Schnittstellen & kompletter Seiten, Bugfixing)</li>
             <li>Frontentwicklung (Bugfixing, Erstellung neuer Features)</li>
             <li>Administration und Wartung von macOS-Clients</li>
             <li>Erstellen von Composer-Paketen zur projektübergreifender Nutzung</li>
           </ul>
-          <!--<p class="resume-item-copy">If you're going to copy paste markup, or edit it, just be sure to keep the appropriate classnames on your new elements for styling purposes.</p>-->
+          
           <ul class="tags">
-            <li><a href="#">Jira</a></li>
-            <li><a href="#">Bitbucket</a></li>
-            <li><a href="#">Git</a></li>
-            <li><a href="#">Bitbucket Pipelines</a></li>
-            <li><a href="#">Gulp</a></li>
-            <li><a href="#">Docker</a></li>
-            <li><a href="#">Drupal 7</a></li>
-            <li><a href="#">Drupal 8</a></li>
-            <li><a href="#">Twig</a></li>
-            <li><a href="#">Laravel 5</a></li>
-            <li><a href="#">Shopware 5</a></li>
-            <li><a href="#">WebEdition</a></li>
-            <li><a href="#">Linux Server</a></li>
-          </ul>
-        </div><!-- end of resume-item -->
+            <li><span>Jira</span></li>
+            <li><span>Bitbucket</span></li>
+            <li><span>Git</span></li>
+            <li><span>Bitbucket Pipelines</span></li>
+            <li><span>Gulp</span></li>
+            <li><span>Docker</span></li>
+            <li><span>Drupal 7</span></li>
+            <li><span>Drupal 8</span></li>
+            <li><span>Twig</span></li>
+            <li><span>Laravel 5</span></li>
+            <li><span>Shopware 5</span></li>
+            <li><span>WebEdition</span></li>
+            <li><span>Linux Server</span></li>
+          </ul></div>
+        </details>
+      </div>
+    </article>
 
-        <!-- Duplicate these resume-item elements and edit accordingly for each job you want to add here -->
-        <div class="resume-item" itemscope itemprop="worksFor" itemtype="http://schema.org/Organization">
-          <h3 class="resume-item-title" itemprop="name">Pluspol interactive GbR</h3>
-          <h4 class="resume-item-details" itemprop="description">Webentwickler Backend &bull; Sep, 2014 &mdash; Juli 2016</h4>
-          <!--<p class="resume-item-copy">Write about your core competencies in one or two sentences describing your position. If you held the position for a long time, it could be a longer section, including a couple bullet points:</p>-->
-          <ul class="resume-item-list">
+        <article class="resume-item experience-item" itemscope itemprop="worksFor" itemtype="https://schema.org/Organization">
+      <span class="experience-index" aria-hidden="true">04</span>
+      <div class="experience-body">
+        <div class="experience-heading"><h3 class="resume-item-title" itemprop="name">Pluspol interactive GbR</h3></div>
+        <p class="role">Webentwickler Backend<span class="role-period">Sep, 2014 &mdash; Juli 2016</span></p>
+        <details class="experience-details">
+          <summary>Aufgaben & Tech-Stack <span class="details-icon" aria-hidden="true"></span></summary>
+          <div class="details-body"><ul class="resume-item-list">
             <li>Backend Webentwicklung von Corporate Websites und Single-Page Webanwendungen mit Hilfe von Laravel, Wordpress und Zend</li>
             <li>Einrichtung von Wordpress-Installationen</li>
             <li>Programmierung von Wordpress-Erweiterungen und Funktionen</li>
@@ -196,85 +198,123 @@
             <li>Beratung und Mitarbeit bei der Angebotserstellung (Aufwandsschätzung)</li>
             <li>Testing und Qualitätssicherung</li>
           </ul>
-          <!--<p class="resume-item-copy">If you're going to copy paste markup, or edit it, just be sure to keep the appropriate classnames on your new elements for styling purposes.</p>-->
+          
           <ul class="tags">
-            <li><a href="#">PhpStorm</a></li>
-            <li><a href="#">Wordpress</a></li>
-            <li><a href="#">Laravel</a></li>
-            <li><a href="#">Ajax</a></li>
-            <li><a href="#">SEO</a></li>
-            <li><a href="#">Git</a></li>
-            <li><a href="#">Gitlab</a></li>
-            <li><a href="#">Linux Server</a></li>
-            <li><a href="#">Vagrant</a></li>
-            <li><a href="#">Photoshop</a></li>
-            <li><a href="#">Gulp</a></li>
-            <li><a href="#">Grunt</a></li>
-          </ul>
-        </div><!-- end of resume-item -->
+            <li><span>PhpStorm</span></li>
+            <li><span>Wordpress</span></li>
+            <li><span>Laravel</span></li>
+            <li><span>Ajax</span></li>
+            <li><span>SEO</span></li>
+            <li><span>Git</span></li>
+            <li><span>Gitlab</span></li>
+            <li><span>Linux Server</span></li>
+            <li><span>Vagrant</span></li>
+            <li><span>Photoshop</span></li>
+            <li><span>Gulp</span></li>
+            <li><span>Grunt</span></li>
+          </ul></div>
+        </details>
+      </div>
+    </article>
 
-        <!-- another resume item -->
-        <div class="resume-item" itemscope itemprop="worksFor" itemtype="http://schema.org/Organization">
-          <h3 class="resume-item-title" itemprop="name">Hetzner Online AG</h3>
-          <h4 class="resume-item-details" itemprop="description">Technischer Supportmitarbeiter RZ &bull; Sep, 2009 &mdash; Aug, 2010</h4>
-          <!--<p class="resume-item-copy">If your stint was shorter, feel free to be brief and just call out the most meaningful points of your role. Be concise, and be meaninful. The person reading just needs enough to want to talk to you more about your experience.</p>-->
-          <ul class="resume-item-list">
+        <article class="resume-item experience-item" itemscope itemprop="worksFor" itemtype="https://schema.org/Organization">
+      <span class="experience-index" aria-hidden="true">05</span>
+      <div class="experience-body">
+        <div class="experience-heading"><h3 class="resume-item-title" itemprop="name">Hetzner Online AG</h3></div>
+        <p class="role">Technischer Supportmitarbeiter RZ<span class="role-period">Sep, 2009 &mdash; Aug, 2010</span></p>
+        <details class="experience-details">
+          <summary>Aufgaben & Tech-Stack <span class="details-icon" aria-hidden="true"></span></summary>
+          <div class="details-body"><ul class="resume-item-list">
             <li>Betreuung weltweiter Kunden im technischen Bereich Dedizierter Server</li>
             <li>Fehler- und Problemanalyse sowie deren Betreuung</li>
             <li>Bereitstellung von Serversystemen</li>
           </ul>
           <ul class="tags">
-            <li><a href="#">OTRS</a></li>
-            <li><a href="#">Windows Server</a></li>
-            <li><a href="#">Linux Server</a></li>
-          </ul>
-        </div><!-- end of resume-item -->
+            <li><span>OTRS</span></li>
+            <li><span>Windows Server</span></li>
+            <li><span>Linux Server</span></li>
+          </ul></div>
+        </details>
+      </div>
+    </article>
 
-        <!--&lt;!&ndash; by now you're getting the picture... &ndash;&gt;-->
-        <!--<div class="resume-item" itemscope itemprop="worksFor" itemtype="http://schema.org/Organization">-->
-          <!--<h3 class="resume-item-title" itemprop="name">Simpson Lazer Tag</h3>-->
-          <!--<h4 class="resume-item-details" itemprop="description">Front Desk Attendant &bull; Jun, 1975 &mdash; May, 1978</h4>-->
-          <!--<p class="resume-item-copy">Boy, when Marge first told me she was going to the Police Academy, I thought it would be fun and exciting, you know, like the movie... Spaceballs. But instead, it's been painful and disturbing, like the movie Police Academy.</p>-->
+      </div></section>
+{% endif %}
+{% if site.resume_section_skills %}
+<section class="content-section skills-section" id="stack" aria-labelledby="stack-title">
 
-        <!--</div>&lt;!&ndash; end of resume-item &ndash;&gt;-->
+        <header class="section-header"><p class="eyebrow">02 / Tech-Stack</p><h2 id="stack-title">Die Werkzeuge.<br>Das Handwerk.</h2><p>Mein Schwerpunkt liegt im PHP-Backend. Dazu kommt das, was gute Software im Alltag braucht.</p></header><div class="section-content">
 
-      </section>
-      <!-- end Experience -->
-      {% endif %}
+        <div class="resume-item">
+          <h3 class="skill-title">Sprachen</h3>
+          <ul class="tags skill-tags"><li>PHP</li><li>SQL</li><li>XML</li><li>JSON</li><li>HTML</li><li>CSS</li><li>JavaScript</li><li>Java</li><li>C</li></ul>
+        </div>
 
-      {% if site.resume_section_education %}
-      <!-- begin Education -->
-      <section class="content-section">
+        <div class="resume-item">
+          <h3 class="skill-title">CMS-Systeme</h3>
+          <ul class="tags skill-tags"><li>Drupal</li><li>Shopware</li><li>Joomla</li><li>WordPress</li></ul>
+        </div>
 
-        <header class="section-header">
-          <h2>Schulischer Werdegang / Ausbildung</h2>
-        </header>
+        <div class="resume-item">
+          <h3 class="skill-title">Anwendungen</h3>
+          <ul class="tags skill-tags"><li>JetBrains Apps</li><li>Jenkins</li><li>Vagrant</li><li>Docker</li><li>Jira</li><li>Bitbucket</li><li>Redmine</li><li>Office</li></ul>
+        </div>
 
-        <div class="resume-item" itemscope itemprop="worksFor" itemtype="http://schema.org/CollegeOrUniversity">
+        <div class="resume-item">
+          <h3 class="skill-title">Frameworks</h3>
+          <ul class="tags skill-tags"><li>Slim</li><li>Laravel</li><li>Symfony</li><li>Bootstrap</li><li>Foundation</li><li>Zend 1</li></ul>
+        </div>
+
+        <div class="resume-item">
+          <h3 class="skill-title">Tools & Workflow</h3>
+          <ul class="tags skill-tags"><li>Gulp</li><li>PHPCS</li><li>PHPMD</li><li>Pear</li><li>Facebook SDK</li><li>Composer</li><li>Vagrant</li><li>Git (& Github)</li><li>SVN</li><li>Make</li><li>Grunt</li><li>Node.js</li><li>Android SDK</li></ul>
+        </div>
+
+      </div></section>
+{% endif %}
+<section class="content-section about-section" id="ueber-mich" aria-labelledby="ueber-mich-title">
+  <header class="section-header"><p class="eyebrow">03 / Über mich</p><h2 id="ueber-mich-title">Neugier hört<br>nicht bei Code auf.</h2></header>
+  <div class="section-content">
+    <p class="about-intro">Am liebsten verstehe ich, wie Dinge funktionieren. Und finde heraus, wie sie noch besser werden.</p>
+    <p class="about-copy">Das gilt für gewachsene Software genauso wie für das Netzwerk hinter einer Festivalbühne oder die Solaranlage zu Hause. Ich tüftle gern – auch abseits des Bildschirms.</p>
+    <ul class="interests">
+      <li><span class="interest-symbol" aria-hidden="true">⌘</span><div><h3>Systeme & Netzwerke</h3><p>Server, Administration und alles, was verbindet.</p></div></li>
+      <li><span class="interest-symbol" aria-hidden="true">↗</span><div><h3>Energie & Automatisierung</h3><p>Solaranlagen optimieren mit MQTT, Grafana, Node-RED, InfluxDB und KI.</p></div></li>
+      <li><span class="interest-symbol" aria-hidden="true">⌁</span><div><h3>Hardware & Hacks</h3><p>Mikrocontroller, Fahrzeug-Retrofit und Softwarehacks rund um die VW AG.</p></div></li>
+      <li><span class="interest-symbol" aria-hidden="true">＋</span><div><h3>Und sonst?</h3><p>Android- und iOS-Entwicklung. Und natürlich Pokémon.</p></div></li>
+    </ul>
+  </div>
+</section>
+{% if site.resume_section_education %}
+<section class="content-section education-section" id="ausbildung" aria-labelledby="ausbildung-title">
+
+        <header class="section-header"><p class="eyebrow">04 / Grundlagen</p><h2 id="ausbildung-title">Wo alles<br>angefangen hat.</h2></header><div class="section-content">
+
+        <div class="resume-item" itemscope itemprop="worksFor" itemtype="https://schema.org/CollegeOrUniversity">
           <h3 class="resume-item-title" itemprop="name">Hochschule Mittweida</h3>
           <h4 class="resume-item-details" itemprop="description">Bachelor-Studiengang, Medieninformatik mit interaktivem Entertainment &bull; 09/2012 &mdash; 08/2014</h4>
           <p class="resume-item-copy">Fachrichtung: Informatics Applications (IA)</p>
           <ul class="tags">
-            <li><a href="#">SVN</a></li>
-            <li><a href="#">Android Programmierung</a></li>
-            <li><a href="#">Java</a></li>
-            <li><a href="#">Redmine</a></li>
+            <li><span>SVN</span></li>
+            <li><span>Android Programmierung</span></li>
+            <li><span>Java</span></li>
+            <li><span>Redmine</span></li>
           </ul>
         </div>
 
-        <div class="resume-item" itemscope itemprop="worksFor" itemtype="http://schema.org/CollegeOrUniversity">
-          <h3 class="resume-item-title" itemprop="name">Hochschule für Telekommunikation Leipzige</h3>
+        <div class="resume-item" itemscope itemprop="worksFor" itemtype="https://schema.org/CollegeOrUniversity">
+          <h3 class="resume-item-title" itemprop="name">Hochschule für Telekommunikation Leipzig</h3>
           <h4 class="resume-item-details" itemprop="description">Bachelor-Studiengang: Telekommunikationsinformatik &bull; 09/2011 &mdash; 08/2012</h4>
-          <!--<p class="resume-item-copy">If you had any meaningful roles at college, feel free to write about them here.</p>-->
+          
         </div>
 
-        <div class="resume-item" itemscope itemprop="worksFor" itemtype="http://schema.org/CollegeOrUniversity">
+        <div class="resume-item" itemscope itemprop="worksFor" itemtype="https://schema.org/CollegeOrUniversity">
           <h3 class="resume-item-title" itemprop="name">BSZ Julius Weisbach</h3>
           <h4 class="resume-item-details" itemprop="description">Fachoberschule &bull; 09/2010 &mdash; 08/2011</h4>
           <p class="resume-item-copy">Fachoberschulabschluss / Fachabitur in Richtung „Wirtschaft & Verwaltung“ im Juli 2011</p>
         </div>
 
-        <div class="resume-item" itemscope itemprop="worksFor" itemtype="http://schema.org/CollegeOrUniversity">
+        <div class="resume-item" itemscope itemprop="worksFor" itemtype="https://schema.org/CollegeOrUniversity">
           <h3 class="resume-item-title" itemprop="name">Deutschen Telekom AG (Chemnitz)</h3>
           <h4 class="resume-item-details" itemprop="description">Ausbildung zum IT-Systemkaufmann &bull; 09/2006 &mdash; 08/2009</h4>
           <p class="resume-item-copy">Einsätze in folgenden Bereichen</p>
@@ -286,97 +326,29 @@
           </ul>
         </div>
 
-        <div class="resume-item" itemscope itemprop="worksFor" itemtype="http://schema.org/CollegeOrUniversity">
+        <div class="resume-item" itemscope itemprop="worksFor" itemtype="https://schema.org/CollegeOrUniversity">
           <h3 class="resume-item-title" itemprop="name">Mittelschule Flöha-Plaue</h3>
           <h4 class="resume-item-details" itemprop="description">Realschule &bull; 09/2000 &mdash; 08/2006</h4>
           <p class="resume-item-copy">Realschulabschluss</p>
         </div>
 
-      </section>
-      <!-- end Education -->
-      {% endif %}
+      </div></section>
+{% endif %}
+{% if site.resume_section_recognition %}
+<section class="content-section recognition-section" id="zertifikate" aria-labelledby="zertifikate-title">
 
-      {% if site.resume_section_projects %}
-      <!-- begin Projects -->
-      <section class="content-section">
-
-        <header class="section-header">
-          <h2>Projekte</h2>
-        </header>
-
-        <div class="resume-item">
-          <h3 class="resume-item-title"><a href="http://donutlocator.io">donutfinder.io</a></h3>
-          <h4 class="resume-item-details">Founder & Primary Developer &bull; 2012 &mdash; Present</h4>
-          <p class="resume-item-copy">Donut Locator is an open source node/ember app that lets users find donuts within a defined radius from their home.</p>
-        </div>
-
-        <div class="resume-item">
-          <h3 class="resume-item-title">Springfield Donut Eater's User Group</h3>
-          <h4 class="resume-item-details">Co-Founder & Organizer &bull; 2007 &mdash; Present</h4>
-          <p class="resume-item-copy">DEUG is a local monthly meetup in Springfield where we share all the latest tips and tricks for dat donut lifestyle. I organize the group, and typically eat most of the donuts.</p>
-        </div>
-
-      </section>
-      <!-- end Projects -->
-      {% endif %}
-
-      {% if site.resume_section_skills %}
-      <!-- begin Skills -->
-      <section class="content-section">
-
-        <header class="section-header">
-          <h2>Fähigkeiten / Fertigkeiten</h2>
-        </header>
-
-        <div class="resume-item">
-          <h4 class="resume-item-details">Sprachen</h4>
-          <p class="resume-item-copy">PHP, SQL, XML, JSON, HTML, CSS, Javascript, Java, C</p>
-        </div>
-
-        <div class="resume-item">
-          <h4 class="resume-item-details">CMS-Systeme</h4>
-          <p class="resume-item-copy">Drupal, Shopware, Joomla, Wordpress</p>
-        </div>
-
-        <div class="resume-item">
-          <h4 class="resume-item-details">Anwendungen</h4>
-          <p class="resume-item-copy">Jetbrains Apps, Jenkins, Vagrant, Docker, Jira, Bitbucket, Redmine, Office</p>
-        </div>
-
-        <div class="resume-item">
-          <h4 class="resume-item-details">Frameworks</h4>
-          <p class="resume-item-copy">Slim, Laravel, Symphony, Bootstrap, Foundation, Zend 1</p>
-        </div>
-
-        <div class="resume-item">
-          <h4 class="resume-item-details">Andere Tools</h4>
-          <p class="resume-item-copy">Gulp, PHPCS, PHPMD, Pear, Facebook SDK, Composer, Vagrant, Git (& Github), SVN, Make, Grunt, Node.js, Android SDK, ...</p>
-        </div>
-
-      </section>
-      <!-- end Skills -->
-      {% endif %}
-
-      {% if site.resume_section_recognition %}
-      <!-- begin Recognition -->
-      <section class="content-section">
-
-        <header class="section-header">
-          <h2>Auszeichnungen</h2>
-        </header>
+        <header class="section-header"><p class="eyebrow">05 / Weiterlernen</p><h2 id="zertifikate-title">Neues lernen.<br>Dranbleiben.</h2></header><div class="section-content">
 
         <div class="resume-item">
           <h3 class="resume-item-title" itemprop="award">Google IT Support Specialization</h3>
-          <h4 class="resume-item-details">October 2018 - <a href="https://coursera.org/share/a692f9bb45d3d39b0fcc5e5f4283eb79" target="_blank">Zertifikat</a></h4>
-          <p class="resume-item-copy">
-            <ul>
+          <h4 class="resume-item-details">Oktober 2018 - <a href="https://coursera.org/share/a692f9bb45d3d39b0fcc5e5f4283eb79" target="_blank" rel="noopener noreferrer">Zertifikat</a></h4>
+          <ul>
               <li>System Administration and IT Infrastructure Services</li>
               <li>Technical Support Fundamentals</li>
               <li>The Bits and Bytes of Computer Networking</li>
               <li>Operating Systems and You: Becoming a Power User</li>
               <li>IT Security: Defense against the digital dark arts</li>
             </ul>
-          </p>
         </div>
 
         <div class="resume-item">
@@ -391,17 +363,12 @@
           <p class="resume-item-copy">Im Rahmen der Englisch-Prüfung.</p>
         </div>
 
-      </section>
-      <!-- end Recognition -->
-      {% endif %}
+      </div></section>
+{% endif %}
+{% if site.resume_section_associations %}
+<section class="content-section associations-section" id="engagement" aria-labelledby="engagement-title">
 
-      {% if site.resume_section_associations %}
-      <!-- begin Associations -->
-      <section class="content-section">
-
-        <header class="section-header">
-          <h2>Organisationen</h2>
-        </header>
+        <header class="section-header"><p class="eyebrow">06 / Engagement</p><h2 id="engagement-title">Auch neben<br>dem Job.</h2><p>Technik, die Menschen zusammenbringt.</p></header><div class="section-content">
 
         <div class="resume-item">
           <h3 class="resume-item-title"><a href="http://www.brocken.rocks">Rocken am Brocken</a> / <a href="https://www.festival-kombinat.org">Festivalkombinat</a></h3>
@@ -410,8 +377,8 @@
         </div>
 
         <div class="resume-item">
-          <h3 class="resume-item-title"><a href="#">Dominic Richter Kleingewerbe</a></h3>
-          <h4 class="resume-item-details">ca. seit ...  &mdash; Heute</h4>
+          <h3 class="resume-item-title"><span>Dominic Richter Kleingewerbe</span></h3>
+          <h4 class="resume-item-details">Nebenberuflich</h4>
           <ul class="resume-item-list">
             <li>Erstellung von Webseiten</li>
             <li>Einrichtung / Betreuung von Servern</li>
@@ -420,17 +387,31 @@
           </ul>
         </div>
 
-      </section>
-      <!-- end Associations -->
-      {% endif %}
+      </div></section>
+{% endif %}
+{% if site.resume_section_projects %}
+<section class="content-section projects-section" id="projekte" aria-labelledby="projekte-title">
 
-      {% if site.resume_section_links %}
-      <!-- begin Links -->
-      <section class="content-section">
+        <header class="section-header"><p class="eyebrow">Projekte</p><h2 id="projekte-title">Eigene Projekte.</h2></header><div class="section-content">
 
-        <header class="section-header">
-          <h2>Zusätzliches</h2>
-        </header>
+        <div class="resume-item">
+          <h3 class="resume-item-title"><a href="http://donutlocator.io">donutfinder.io</a></h3>
+          <h4 class="resume-item-details">Founder & Primary Developer &bull; 2012 &mdash; Present</h4>
+          <p class="resume-item-copy">Donut Locator is an open source node/ember app that lets users find donuts within a defined radius from their home.</p>
+        </div>
+
+        <div class="resume-item">
+          <h3 class="resume-item-title">Springfield Donut Eater's User Group</h3>
+          <h4 class="resume-item-details">Co-Founder & Organizer &bull; 2007 &mdash; Present</h4>
+          <p class="resume-item-copy">DEUG is a local monthly meetup in Springfield where we share all the latest tips and tricks for dat donut lifestyle. I organize the group, and typically eat most of the donuts.</p>
+        </div>
+
+      </div></section>
+{% endif %}
+{% if site.resume_section_links %}
+<section class="content-section links-section" id="links" aria-labelledby="links-title">
+
+        <header class="section-header"><p class="eyebrow">Mehr</p><h2 id="links-title">Weiterklicken.</h2></header><div class="section-content">
 
         <div class="resume-item">
           <ul class="resume-item-list">
@@ -439,34 +420,19 @@
           </ul>
         </div>
 
-      </section>
-      <!-- end Links -->
-      {% endif %}
+      </div></section>
+{% endif %}
 
-  {% if site.resume_print_social_links %}
-  <!-- begin Print Social Links -->
-  <section class="content-section print-only">
-
-    <header class="section-header">
-      <h2>Soziale Netzwerke</h2>
-    </header>
-
-    <div class="resume-item">
-      {% include print-social-links.html %}
-    </div>
-
-  </section>
-  <!-- end Print Social Links -->
-  {% endif %}
-
-      <footer class="page-footer">
-        <p class="footer-line">Build with Jekyll</p>
-        <!--<p class="footer-line">Made by <a href="http://twitter.com/jglovier">@jglovier</a>. Fork me on <a href="https://github.com/jglovier/resume-template">GitHub</a>.</p>-->
-        <!--<p class="footer-line">If this is your live resume, you can modify or remove this part. ;-)</p>-->
-      </footer>
-
-    </div>
-
-  </body>
-
+    {% if site.resume_contact_email %}
+    <section class="contact-section" id="kontakt" aria-labelledby="kontakt-title">
+      <div><p class="eyebrow">Kontakt / Sag Hallo</p><h2 id="kontakt-title">Gute Software beginnt<br>mit einem Gespräch<span>.</span></h2><p>Ob fachlicher Austausch oder eine spannende Idee – ich freue mich über eine Nachricht.</p></div>
+      <a class="contact-arrow no-print" href="mailto:{{ site.resume_contact_email }}" aria-label="E-Mail an {{ site.resume_name }} senden">↗</a>
+      <a class="contact-email" href="mailto:{{ site.resume_contact_email }}" itemprop="email">{{ site.resume_contact_email }} <span aria-hidden="true">↗</span></a>
+      <div class="contact-socials no-print">{% include icon-links.html %}</div>
+    </section>
+    {% endif %}
+    {% if site.resume_print_social_links %}<section class="print-only"><h2>Soziale Netzwerke</h2>{% include print-social-links.html %}</section>{% endif %}
+  </main>
+  <footer class="page-footer wrapper"><p>© {{ site.time | date: '%Y' }} {{ site.resume_name }}<br>Mit Neugier gebaut. In Leipzig.</p><a class="no-print" href="#top">Zurück nach oben <span aria-hidden="true">↑</span></a></footer>
+</body>
 </html>

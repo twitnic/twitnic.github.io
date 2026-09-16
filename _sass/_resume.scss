@@ -1,234 +1,136 @@
-// Resume styles
-// ---------------------------------------/
+// Components for the current resume layout.
+.hero { display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(0, .8fr); gap: 70px; align-items: center; padding: 82px 0 72px; }
+.hero-without-portrait { grid-template-columns: minmax(0, 1fr); }
+.hero-copy { min-width: 0; }
+.hero-eyebrow { display: flex; align-items: center; gap: 10px; margin-bottom: 25px; color: $muted; }
+.status-dot, .location-dot { display: inline-block; flex-shrink: 0; width: 7px; height: 7px; border-radius: 50%; background: $accent-ink; }
+.hero h1 { font-size: clamp(64px, 7.5vw, 104px); line-height: .98; letter-spacing: -.065em; }
+.name-dot { color: $accent-ink; }
+.hero-statement { margin-top: 30px; font-size: 24px; font-weight: 650; letter-spacing: -.035em; }
+.hero-description { max-width: 470px; margin-top: 16px; color: $muted; font-size: 15px; }
+.hero-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 30px; margin-top: 30px; }
+.availability, .header-contact-info { margin-top: 20px; font-size: 14px; }
+.portrait { width: 100%; max-width: 400px; justify-self: end; }
+.portrait-frame { position: relative; padding: 25px 25px 65px; background: #e5e9db; border-radius: 8px; }
+.portrait-grid { position: absolute; inset: 0; border-radius: inherit; background-image: linear-gradient(rgba($ink, .06) 1px, transparent 1px), linear-gradient(90deg, rgba($ink, .06) 1px, transparent 1px); background-size: 25px 25px; }
+.portrait .avatar { position: relative; width: 100%; aspect-ratio: 1; object-fit: cover; border-radius: 4px; filter: grayscale(1); }
+.portrait-spark { position: absolute; top: -23px; right: -20px; width: 72px; height: 72px; color: $accent-ink; transform: rotate(12deg); }
+.portrait-note { position: absolute; right: 12px; bottom: 20px; min-width: 205px; padding: 15px 48px 15px 20px; background: $accent; font-size: 16px; line-height: 1.4; font-weight: 750; letter-spacing: -.03em; transform: rotate(-5deg); }
+.portrait-note > span { position: absolute; right: 18px; top: 15px; font-size: 30px; font-weight: 400; }
+.portrait figcaption { display: flex; align-items: center; gap: 8px; padding-top: 17px; font: 10px/1.5 $mono-font; color: $muted; }
+.portrait-caption-code { margin-left: auto; font-size: 16px; }
+.focus-strip { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); padding: 26px 0; margin-bottom: 48px; border-top: 1px solid $line; border-bottom: 1px solid $line; }
+.focus-strip > div { padding: 0 28px; border-left: 1px solid $line; }
+.focus-strip > div:first-child { padding-left: 0; border-left: 0; }
+.focus-strip .eyebrow { display: block; color: $muted; margin-bottom: 7px; }
+.focus-strip strong { font-size: 15px; font-weight: 650; }
 
-// util
+.resume-item + .resume-item { margin-top: 32px; padding-top: 32px; border-top: 1px solid $line; }
+.resume-item-title { font-size: 23px; line-height: 1.3; letter-spacing: -.035em; overflow-wrap: anywhere; }
+.resume-item-title a { text-decoration-thickness: 1px; }
+.resume-item-details { margin-top: 10px; font-size: 14px; line-height: 1.7; font-weight: 500; color: $muted; }
+.resume-item-copy, .resume-item-list { margin-top: 14px; font-size: 14px; color: $muted; }
+.resume-item-list li + li { margin-top: 7px; }
+.experience-item { display: grid; grid-template-columns: 28px minmax(0, 1fr); gap: 18px; }
+.experience-index { padding-top: 6px; font: 11px/1.5 $mono-font; color: $muted; }
+.experience-heading { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px; }
+.current-badge { display: inline-flex; align-items: center; gap: 7px; padding: 4px 10px; border-radius: 20px; background: $accent; font: 10px/1.5 $mono-font; white-space: nowrap; }
+.role { margin-top: 9px; font-size: 14px; font-weight: 600; }
+.role-period { display: block; margin-top: 5px; color: $muted; font: 11px/1.6 $mono-font; font-weight: 400; }
+.experience-details { margin-top: 18px; }
+.experience-details summary { display: flex; align-items: center; justify-content: space-between; gap: 15px; min-height: 52px; padding: 12px 16px; border: 1px solid $line; border-radius: 6px; background: #eceee5; font-size: 13px; font-weight: 700; cursor: pointer; list-style: none; }
+.experience-details summary::-webkit-details-marker { display: none; }
+.experience-details[open] summary { border-color: $accent-ink; background: rgba($accent, .2); }
+.experience-details summary:hover, .experience-details summary:focus-visible { border-color: $accent-ink; background: rgba($accent, .35); }
+.details-icon { position: relative; width: 26px; height: 26px; flex-shrink: 0; border-radius: 50%; background: $accent-ink; color: $paper; }
+.details-icon::before { content: ""; position: absolute; top: 8px; left: 9px; width: 8px; height: 8px; border-right: 2px solid currentColor; border-bottom: 2px solid currentColor; transform: rotate(45deg); }
+.experience-details[open] .details-icon::before { top: 10px; transform: rotate(225deg); }
+.details-body { padding-top: 16px; }
+.role-history { font-size: 13px; color: $muted; }
+.skill-title { margin-bottom: 16px; font-size: 17px; letter-spacing: -.02em; }
+.about-intro { max-width: 660px; font-size: 25px; line-height: 1.45; font-weight: 600; letter-spacing: -.035em; }
+.about-copy { margin-top: 20px; color: $muted; font-size: 15px; }
+.interests { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 30px; padding: 0; margin: 35px 0 0; list-style: none; }
+.interests li { display: flex; align-items: flex-start; gap: 13px; }
+.interest-symbol { display: grid; place-items: center; width: 34px; height: 34px; flex-shrink: 0; border: 1px solid $line; border-radius: 6px; font-size: 23px; line-height: 1; }
+.interests h3 { font-size: 14px; line-height: 1.5; letter-spacing: -.02em; }
+.interests p { margin-top: 6px; color: $muted; font-size: 12px; }
+.contact-section { display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: center; gap: 32px; margin: 16px 0 32px; padding: 48px; border-radius: 8px; background: $dark; color: $paper; }
+.contact-section .eyebrow { margin-bottom: 25px; color: $accent; }
+.contact-section h2 { font-size: clamp(30px, 3.6vw, 48px); }
+.contact-section h2 span { color: $accent; }
+.contact-section p:not(.eyebrow) { max-width: 550px; margin-top: 22px; font-size: 14px; color: #bdc5b8; }
+.contact-arrow { display: grid; place-items: center; width: 80px; height: 80px; border-radius: 50%; background: $accent; color: $ink; text-decoration: none; font-size: 45px; }
+.contact-arrow:hover { background: $paper; }
+.contact-email { justify-self: start; max-width: 100%; font-size: 20px; font-weight: 600; text-decoration-thickness: 1px; overflow-wrap: anywhere; }
+.contact-email span { display: inline-block; margin-left: 10px; }
+.contact-socials { justify-self: end; }
+.icon-links { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; margin: 0; padding: 0; list-style: none; }
+.icon-link { display: grid; place-items: center; width: 40px; height: 44px; color: #bdc5b8; }
+.icon-link:hover { color: $accent; }
+.icon-link .icon { width: 22px; height: 22px; }
+.icon-link .icon path { fill: currentColor; }
 
-.section-header {
-  @include section_border;
-  margin-bottom: 1.5rem;
-
-  h2 {
-    @include sans;
-    font-weight: 900;
-    font-size: 1.75rem;
-    letter-spacing: -.05rem;
-    margin: 0;
-  }
+@media (max-width: 1000px) {
+  .hero { gap: 40px; padding: 65px 0; }
+  .hero-statement { font-size: 21px; }
+  .contact-section { padding: 35px; }
+  .contact-socials { grid-column: 1 / -1; justify-self: start; }
 }
-
-// page header styles
-
-.page-header { padding: 1.5rem 0;
-
-  .avatar {
-    width: 95px;
-    max-width: 100%;
-    overflow: hidden;
-    @include border-radius(100px);
-    margin: 0 auto;
-    display: block;
-  }
-
-  .header-name {
-    @include sans;
-    font-size: 3rem;
-    font-weight: 900;
-    text-align: center;
-    letter-spacing: -.15rem;
-    line-height: 1;
-    margin: 1rem 0 0;
-  }
-
-  .header-contact-info {
-    @include sans;
-    text-align: center;
-  }
-  .header-contact-info p a {
-    color: inherit;
-  }
-
-  .title-bar {
-    @include section_border;
-    margin-top: 2rem;
-    padding: .4rem 0;
-    @include clearfix;
-
-    .header-title {
-      @include sans;
-      font-weight: 300;
-      font-size: 1.75rem;
-      line-height: 2rem;
-      letter-spacing: -.05rem;
-      text-align: center;
-      margin: 0 0 .5rem;
-
-      @include media_larger_than_mobile {
-        float: left;
-        margin: 0;
-      }
-    }
-  }
-
-  .executive-summary {
-    @include media_larger_than_mobile { font-size: 1.125rem; }
-  }
+@media (max-width: 760px) {
+  .hero { grid-template-columns: minmax(0, 1fr); gap: 45px; padding: 48px 0 40px; }
+  .hero h1 { font-size: clamp(64px, 14vw, 90px); }
+  .hero-statement { margin-top: 25px; }
+  .hero-description { max-width: 520px; }
+  .hero-eyebrow { font-size: 10px; }
+  .portrait { justify-self: center; max-width: 340px; width: calc(100% - 24px); }
+  .portrait-spark { width: 60px; height: 60px; right: -15px; }
+  .focus-strip { grid-template-columns: minmax(0, 1fr); padding: 8px 0; margin-bottom: 20px; }
+  .focus-strip > div, .focus-strip > div:first-child { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px 15px; padding: 16px 0; border-left: 0; }
+  .focus-strip > div + div { border-top: 1px solid $line; }
+  .focus-strip .eyebrow { margin: 0; align-self: center; font-size: 9px; }
+  .focus-strip strong { font-size: 13px; }
+  .experience-item { grid-template-columns: 20px minmax(0, 1fr); gap: 12px; }
+  .resume-item-title { font-size: 21px; }
+  .interests { grid-template-columns: minmax(0, 1fr); gap: 25px; }
+  .contact-section { grid-template-columns: minmax(0, 1fr); gap: 28px; padding: 30px 24px; }
+  .contact-arrow { display: none; }
+  .contact-email { font-size: 18px; }
+  .contact-socials { grid-column: auto; }
 }
-
-.icon-links {
-  margin: 0;
-  padding: 0;
-  list-style: none;
-  position: relative;
-  top: 4px;
-  text-align: center;
-  border-top: 2px solid #c7c7c7;
-  padding-top: .4rem;
-
-  @include media_larger_than_mobile {
-    float: right;
-    border-top: none;
-    padding-top: 0;
-  }
-
-  .icon-link-item {
-    display: inline-block;
-    margin-left: 5px;
-  }
-
-  .icon-link { display: inline-block;
-
-    &:hover .icon path {
-      fill: #333;
-      @include transition(all .2s ease);
-    }
-  }
-
-  .icon {
-    height: 28px;
-  }
+@media (max-width: 380px) {
+  .navigation-links { gap: 12px; }
+  .navigation-links > a { font-size: 11px; }
+  .brand { font-size: 30px; }
 }
-
-.contact-button {
-  @include border-radius(3px);
-  background-color: #efefef;
-  text-decoration: none;
-  text-align: center;
-  display: block;
-  margin: 1.5rem auto;
-  width: 220px;
-  font-size: 1.375rem;
-  @include sans_light;
-  color: #333;
-  line-height: 55px;
-  @include transition(all .2s ease);
-
-  &:hover {
-    background-color: #333;
-    color: #fff;
-  }
-
-  &.not-looking { width: 400px; }
-}
-
-// resume content styles
-
-.content-section {
-  margin: 0 0 3rem;
-
-  .resume-item { margin-bottom: 2rem; }
-
-  .resume-item-title {
-    @include sans_bold;
-    margin: 0 0 .75rem;
-    font-size: 1.5rem;
-    letter-spacing: -.05rem;
-    line-height: 1;
-  }
-
-  .resume-item-details {
-    font-size: 1.125rem;
-    margin: 0 0 .75rem;
-    line-height: 1;
-
-    &.award-title {
-      font-size: 1rem;
-    }
-  }
-
-  .resume-item-title,
-  .resume-item-details,
-  .resume-item-copy,
-  .resume-item-list {
-    a {
-      color: #333;
-      text-decoration: none;
-      border-bottom: 1px solid;
-
-      &:hover {
-        border-bottom: none;
-        color: #9c9c9c;
-      }
-    }
-  }
-
-  .resume-item-copy { margin: .75rem 0 0; }
-}
-
-// footer styles
-
-.page-footer {
-  border-top: 4px solid #c7c7c7;
-  padding-top: 1.5rem;
-  text-align: center;
-  margin-bottom: 3rem;
-
-  .footer-line {
-    margin: 0;
-    font-size: .875rem;
-    color: #999;
-
-    > a {
-      font-weight: 700;
-      color: #333;
-    }
-  }
-}
-
-.print-only { display: none !important }
 
 @media print {
-  .no-print { display: none !important }
-  .print-only { display: block !important }
-  body { font-size: 12px; line-height: 1rem; }
-  .page-header { padding: 1rem 0 .2rem;
-    .header-name {
-      @include sans_bold;
-      font-size: 2rem;
-      margin: 0 0 .2rem;
-    }
-  }
-  .section-header {
-    @include section_border_thin;
-    margin-bottom: 1rem;
-    h2 { font-size: 1.2rem; line-height: 1.5rem; }
-  }
-  .content-section {
-    margin: 0 0 1rem;
-    .resume-item { margin-bottom: 1rem; }
-    .resume-item-title {
-      font-size: 16px;
-      line-height: .7em;
-    }
-
-    .resume-item-details {
-      font-size: 12px;
-      margin: 0 0 .75rem;
-      line-height: .7em;
-      font-style:italic;
-
-      &.award-title {
-        font-size: 11px;
-      }
-    }
-  }
+  @page { margin: 15mm; }
+  html, body { background: #fff; color: #000; }
+  body { font-size: 10pt; line-height: 1.5; }
+  .no-print { display: none !important; }
+  .print-only { display: block !important; }
+  .wrapper { width: 100%; max-width: none; }
+  .hero { display: block; padding: 0 0 20px; }
+  .hero h1 { font-size: 36pt; }
+  .hero-statement { font-size: 15pt; margin-top: 15px; }
+  .hero-eyebrow { margin-bottom: 10px; }
+  .hero-description { max-width: none; }
+  .focus-strip { display: none; }
+  .content-section { display: block; padding: 24px 0; }
+  .section-header { margin-bottom: 20px; break-after: avoid; }
+  .section-header h2 { font-size: 20pt; }
+  .section-header .eyebrow { margin-bottom: 6px; }
+  .section-header > p:not(.eyebrow) { max-width: none; margin-top: 10px; }
+  .resume-item { break-inside: avoid; }
+  .resume-item-title { font-size: 13pt; }
+  .resume-item + .resume-item { margin-top: 20px; padding-top: 20px; }
+  .details-body { display: block !important; }
+  .experience-details::details-content { content-visibility: visible; }
+  .experience-details summary { display: none; }
+  .contact-section { display: block; margin: 0; padding: 20px 0; border-top: 1px solid $line; background: #fff; color: #000; }
+  .contact-section h2 { font-size: 20pt; }
+  .contact-section .eyebrow, .contact-section p:not(.eyebrow) { color: $muted; }
+  .contact-email { display: inline-block; margin-top: 15px; font-size: 12pt; }
+  .page-footer { padding: 20px 0 0; }
 }

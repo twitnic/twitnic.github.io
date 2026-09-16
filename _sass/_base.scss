@@ -1,46 +1,42 @@
-// Base styles
-// ---------------------------------------/
-* {
-  -webkit-box-sizing: border-box;
-  -moz-box-sizing: border-box;
-  box-sizing: border-box;
+@font-face {
+  font-family: "Manrope";
+  font-style: normal;
+  font-weight: 400 800;
+  font-display: swap;
+  src: url("../fonts/manrope-latin.woff2") format("woff2");
 }
 
-html {
-  background: $white;
-}
+*, *::before, *::after { box-sizing: border-box; }
+html { scroll-behavior: smooth; scroll-padding-top: 100px; background: $paper; }
+body { margin: 0; color: $ink; font: 400 16px/1.7 $body-font; -webkit-font-smoothing: antialiased; }
+button, input { font: inherit; }
+button, a { -webkit-tap-highlight-color: transparent; }
+button { color: inherit; cursor: pointer; }
+a { color: inherit; text-underline-offset: 4px; }
+img, svg { display: block; max-width: 100%; }
+img { height: auto; }
+button, summary, a { touch-action: manipulation; }
+h1, h2, h3, h4, p, figure { margin: 0; }
+h1, h2, h3 { font-weight: 750; line-height: 1.12; letter-spacing: -.045em; }
+ul { padding-left: 1.2em; }
+::selection { background: $accent; color: $ink; }
+:focus-visible { outline: 3px solid $accent-ink; outline-offset: 6px; border-radius: 3px; }
+[hidden] { display: none !important; }
+.skip-link { position: fixed; top: 12px; left: 12px; transform: translateY(-180%); z-index: 20; padding: 10px 20px; background: $accent; }
+.skip-link:focus { transform: translateY(0); }
+.eyebrow { font: 500 11px/1.6 $mono-font; text-transform: uppercase; letter-spacing: .1em; }
+.text-link { display: inline-flex; align-items: center; gap: 12px; font-size: 14px; font-weight: 700; text-decoration: none; }
+.text-link:hover { color: $accent-ink; }
+.arrow { display: inline-block; font-family: sans-serif; font-size: 22px; line-height: 1; transition: transform .2s ease; }
+a:hover .arrow { transform: translate(2px, -2px); }
+.button { display: inline-flex; justify-content: center; align-items: center; gap: 24px; min-height: 50px; padding: 13px 22px; border: 1px solid $ink; border-radius: 6px; background: $ink; color: $paper; font-size: 13px; font-weight: 650; line-height: 1.4; text-decoration: none; transition: background .2s, color .2s, transform .2s; }
+.button:hover { background: $accent; color: $ink; transform: translateY(-2px); }
+.button-accent { background: $accent; color: $ink; border-color: $accent; }
+.button-accent:hover { background: $paper; border-color: $paper; }
+.button-quiet { background: transparent; color: $ink; border-color: $line; }
+.print-only { display: none !important; }
 
-body{
-  @include serif;
-  color: $text_color;
-  font-size: 16px;
-  line-height: 1.5;
-}
-
-.wrapper:before,
-.wrapper:after { content:""; display:table; }
-.wrapper:after { clear: both; }
-.wrapper {
-  max-width: 728px;
-  padding: 0 24px;
-  margin: 0 auto;
-  zoom: 1;
-}
-
-// clearfix (now called group,
-// via http://css-tricks.com/snippets/css/clear-fix/)
-.group:before,
-.group:after { content:""; display:table; }
-.group:after { clear:both; }
-.group { zoom:1; /* For IE 6/7 (trigger hasLayout) */ }
-
-::-moz-selection {
-    background: rgba(51,51,51,.8);
-    color: #fff;
-    text-shadow: none;
-}
-::selection {
-    background: rgba(51,51,51,.8);
-    color: #fff;
-    text-shadow: none;
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { animation: none !important; transition: none !important; }
 }
